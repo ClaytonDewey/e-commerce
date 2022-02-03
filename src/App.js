@@ -115,11 +115,11 @@ export default class App extends Component {
                             </div>
                         </nav>
                         <Routes>
-                            <Route exact path="/" component={ProductList} />
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/cart" component={Cart} />
-                            <Route exact path="/add-product" component={AddProduct} />
-                            <Route exact path="/products" component={ProductList} />
+                            <Route path="/" element={<ProductList />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/cart" element={<Cart />} />
+                            <Route path="/add-product" element={<AddProduct />} />
+                            <Route path="/products" element={<ProductList />} />
                         </Routes>
                     </div>
                 </Router>
