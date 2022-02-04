@@ -26,7 +26,7 @@ class AddProduct extends Component {
 
             await axios.post("http://localhost:3001/products", { id, name, price, stock, shortDesc, description });
 
-            this.props.context.AddProduct(
+            this.props.context.addProduct(
                 {
                     name,
                     price,
@@ -48,7 +48,7 @@ class AddProduct extends Component {
         const { name, price, stock, shortDesc, description } = this.state;
         const { user } = this.props.context;
 
-        return !(user && user.accessLever < 1) ? (
+        return !(user && user.accessLevel < 1) ? (
             <Navigate to="/" />
         ) : (
             <>
