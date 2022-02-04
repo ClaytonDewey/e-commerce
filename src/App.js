@@ -29,7 +29,7 @@ export default class App extends Component {
         user = user ? JSON.parse(user) : null;
         cart = cart ? JSON.parse(cart) : {};
 
-        this.setState({ user, products: products.data });
+        this.setState({ user, products: products.data, cart });
     }
 
     login = async (email, password) => {
@@ -90,6 +90,27 @@ export default class App extends Component {
         let cart = {};
         localStorage.removeItem("cart");
         this.setState({ cart });
+    };
+
+    checkout = () => {
+        if (!this.state.user) {
+            this.routerRef.current.history.push("/login");
+            return;
+        }
+
+        const cart = this.state.cart;
+
+        const products = this.state.products.map((p) => {
+            if (cart[p.name]) {
+                p.stock = p.stock - cart[p.name].amount;
+
+                axios.put(`http://localhost:3001/products/${p.id}`, { ...p });
+            }
+            return p;
+        });
+
+        this.setState({ products });
+        this.clearCart();
     };
 
     render() {
